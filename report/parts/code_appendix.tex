@@ -1,0 +1,56 @@
+\chapter{Source code}
+\label{chap:sourcecode}
+
+The source code used to produce the figures of this report is hosted at \url{https://github.com/Klafyvel/Hybrid-Chiral-Lasers}. This appendix describes the different files present.
+
+\paragraph{Utilitaries}
+
+\begin{description}
+	\item[ellipse.m] Calculate the points belonging to an ellipse given the parameters $\epsilon$, the rotation $\theta$, the position $(x_0, y_0)$, the semi-major axis $a$ and a number of points $n$.
+	\item[find_max.m] Find the local maxima of a 2D array. The local maxima must be a maximum in a rectangle of size \verb|radx|$\times$\verb|rady|.
+	\item[find_modes] Find the output modes corresponding to the cavities at \verb|row,col|. Outputs \verb|R, theta, epsilon, lcp, modes|, the radius, rotation, parameter, a boolean which is \verb|true| for left-handed polarisations and the corresponding electrical field.
+	\item[partial_inverse.m] Calculate the partial inverse of a $4\times4$ matrix.
+	\item[plot_ellipse.m] Plot the output polarisation ellipses.
+	\item[rotation.m] Calculate a rotation matrix.
+	\item[savefig.m] Smartly save a figure, without overriding older plots.
+	\item[reflection_cwt.m] Calculate the reflection matrix associated with a transfer matrix in circular basis.
+	\item[reflection_oseen.m] Calculate the reflection matrix associated with a matrix in electro-magnetic basis, given the refractive indices of surrounding media.
+	\item[transmission_cwt.m] Calculate the transmission matrix associated with a transfer matrix in circular basis.
+	\item[transmission_oseen.m] Calculate the transmission matrix associated with a matrix in electro-magnetic basis, given the refractive indices of surrounding media.
+\end{description}
+
+\paragraph{Transfer matrices}
+
+\begin{description}
+	\item[oseen.m] Transfer matrix for the Oseen method, given $p, \epsilon_a, \epsilon_b, \psi, L, k_0$ in electromagnetic basis.
+	\item[cwt.m] Transfer matrix for coupled-waves theory given $p, \epsilon_a, \epsilon_b, \psi, L, k_0$ and \verb|lhm| the handedness.
+	\item[cwt_from_reduced_variables.m] Same as above, but given $p, \psi, L, k, \kappa, \delta k$ and \verb|lhm|.
+	\item[cwt_convenient_variables.m] Calculate reduced parameters from parameters of \verb|cwt.m|.
+	\item[cwt_circular_to_emag_basis.m] Calculate the matrix to switch from circular to electromagnetic matrix given the parameters of \verb|cwt.m|.
+	\item[cwt_circular_to_emag_basis_from_reduced_variables.m] Same as above but with reduced parameters.
+	\item[interface_chiral_same_handedness.m] Matrix for the interface between two media of same handedness.
+	\item[interface_chiral_same_handedness_from_reduced_variables.m] Same as above, with reduced variables.
+	\item[interface_chiral_to_isotrope.m] Matrix for the interface between chiral media and isotropic media.
+	\item[interface_chiral_to_isotrope_from_reduced_variables.m] Same as above, with reduced variables.
+	\item[interface_left_to_right.m] Matrix for the interface from a left-handed media to a right-handed one.
+	\item[interface_left_to_right_from_reduced_variables.m] Same as above, with reduced variables.
+\end{description}
+
+\paragraph{Reflectivities}
+
+\begin{description}
+	\item[simple_cavity_transmission.m] Transmission coefficients for the simple cavity.
+	\item[check_energy_conservation.m] Calculate energy conservation coefficients for the simple cavity.
+	\item[narrow_band.m] Transmission coefficients for the cavity with a defect.
+\end{description}
+
+\paragraph{Cavities}
+
+\begin{description}
+	\item[simple_cavity.m] Reproduce the cavity described by \textcite{topf_modes_2014} using various methods.
+	\item[defect_lasing.m] Cavity with a defect.
+	\item[defect_tuning.m] Scan through the possible defect angles of the simple cavity. This code takes more than an hour to run on my computer.
+	\item[hybrid_cavity.m] Hybrid cavity.
+	\item[hybrid_defect_cavity.m] Hybrid cavity with a defect.
+	\item[hybrid_defect_tuning.m] Scan through the possible defect angles of the hybrid cavity. This code takes more than an hour to run on my computer.
+\end{description}

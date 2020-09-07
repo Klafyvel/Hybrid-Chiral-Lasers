@@ -1,0 +1,90 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{physics}
+\usepackage{amsmath,amsfonts,amsthm,bm, amssymb}
+\usepackage[a4paper]{geometry}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{tabulary}
+\usepackage[acronym,toc]{glossaries}
+\usepackage[sorting=none, backend=biber, citestyle=numeric-comp]{biblatex}
+\usepackage{wrapfig}
+\usepackage[xetex]{hyperref}
+\usepackage[all]{hypcap}
+
+\hypersetup{
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=blue,      
+	urlcolor=blue,
+	bookmarks=true,
+	citecolor=blue,
+	pdfauthor=Hugo Levy-Falk
+}
+
+\title{Imperial College London\\MSc in Optics and Photonics summer project\\Hybrid chiral lasers}
+\author{Hugo Levy-Falk\\Supervisor : Prof. Martin McCall}
+\date{2020}
+
+\addbibresource{biblio.bib}
+
+\input{acronyms}
+
+\newenvironment{acknowledgements}%
+{\cleardoublepage\thispagestyle{empty}\null\vfill\begin{center}%
+		\bfseries Acknowledgements\end{center}}%
+{\vfill\null}
+
+\usetikzlibrary{decorations.pathreplacing}
+
+\begin{document}
+	
+\maketitle
+
+\begin{abstract}
+	
+	This document reports a study on hybrid chiral lasers. It extends the coupled wave theory used by \citename{topf_modes_2014} to develop a simple chiral cavity laser model. Three cavity designs are modelled: a simple cavity with a twist defect at the centre, a hybrid cavity with a gain medium surrounded by two reflectors of opposite handedness and a cavity mixing the two previous designs. It is shown the latter design corresponds to a tunable chiral laser offering almost pure circularly polarised output.
+
+\end{abstract}
+
+\begin{acknowledgements}
+	I would like to thank Martin McCall, whose advices have always been really helpful, for offering me the opportunity to work on this topic while allowing me to look in any direction I thought useful. This has been a great occasion for me to grow a much deeper understanding of photonic structures and their behaviours.
+	
+	I also thank Nathan Alglave, who introduced me to Blender and advised me on how to use it. His advises are the reason I was able to produce nice representations of chiral cavity such as the ones in figure \ref{fig:cavities_blender}.
+	
+	I am also grateful towards my friends who accepted to proof-read my clumsy english to make this report somewhat understandable.
+	
+	Finally I would like to thank Mathworks, the company editing the MATLAB language, for their poor taste in programming language designs. This helped me remember how much I prefer working with the Julia programming language.
+\end{acknowledgements}
+
+\tableofcontents
+\listoffigures
+
+\chapter{Introduction}
+\input{parts/introduction}
+\chapter{Background}
+This chapter aims to bring the definitions, fundamental theory as well as a review of related experimental work on chiral media in optics. A presentation of both an exact (Oseen method) and an approximate (Coupled Wave Theory) theory, derived by \textcite{mccall_simplified_2009} is given. The approximate theory is extended to provide an expression accounting for rotation of the medium along the propagation axis, as well as a treatment of all kind of interfaces between chiral and isotropic media. 
+\input{parts/definitions}
+\input{parts/oseen}
+\input{parts/cwt}
+\input{parts/experimental}
+\input{parts/martins_papers}
+\input{parts/objectives}
+\chapter{Method}
+\input{parts/method}
+\chapter{Results}
+This part presents the results obtained for the four cavities modelled. First, the simple cavity is used to gauge the quality of the implementation, both regarding previous studies and the comparison between approximate and exact theory. Then the results for the three new cavity designs are given in term of reflectivity when this is relevant and of output polarisation and intensity distribution. This allows to determinate the dynamics that lead the cavity to lase.
+\input{parts/simple_cavity}
+\input{parts/defect_cavity}
+\input{parts/hybrid_cavity}
+\input{parts/hybrid_defect_cavity}
+\chapter{Conclusion}
+\input{parts/conclusion}
+\printbibliography
+\appendix
+\input{parts/code_appendix}
+\input{parts/reflectivities_appendix}
+\input{parts/transmittivities_appendix}
+\input{parts/laser_cavities_appendix}
+\end{document}

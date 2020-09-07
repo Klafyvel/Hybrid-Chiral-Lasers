@@ -1,0 +1,131 @@
+\section{Oseen transformation}
+
+The Oseen transformation allows to give an exact solution for the electromagnetic fields in a chiral medium, although it does not yield an explicit form of the propagation matrix.
+
+\subsection{Derivation of transfer matrix equation}
+
+The main idea behind this method is to use a well-chosen change of basis, named "the Oseen transformation", described by equation \ref{eq:oseen_transformation}.
+
+\begin{eqnarray}
+\bm{e}(z) = \bm{R}^{-1}(z)\cdot\bm{E}_\perp(z) &,& \bm{h}(z) = \bm{R}^{-1}(z)\cdot\bm{H}'_\perp(z) \label{eq:oseen_transformation}
+\end{eqnarray}
+%
+By rewriting equations \ref{eq:de_h} and \ref{eq:dh_e} as follow:
+\begin{eqnarray}
+\dv{z}\bm{E}_\perp = ik_0\begin{pmatrix}
+0 & 1\\-1 & 0
+\end{pmatrix}\bm{H}'_\perp&,&
+\dv{z}\bm{H}'_\perp = -ik_0\begin{pmatrix}
+0 & 1\\-1 & 0
+\end{pmatrix}\bm{\epsilon}\bm{E}_\perp
+\end{eqnarray}
+%
+and noting that $\dv{z}\bm{R}^{-1} = p\begin{pmatrix}
+0 & 1 \\ -1 & 0
+\end{pmatrix} \bm{R}^{-1}$, these two intermediate quantities must therefore verify equation \ref{eq:oseen_intermediate}.
+
+\begin{eqnarray}
+\dv{z}\begin{bmatrix}
+e_x\\e_y\\h_x\\h_y
+\end{bmatrix} = i\underbrace{\begin{pmatrix}
+	0 & -ip & 0 & k_0\\
+	ip & 0 & -k_0 & 0\\
+	0 & -k_0\epsilon_b & 0 & -ip\\
+	k_0\epsilon_a & 0 & ip & 0\\
+	\end{pmatrix}}_{=\bm{G}}\begin{bmatrix}
+e_x\\e_y\\h_x\\h_y
+\end{bmatrix} \label{eq:oseen_intermediate}
+\end{eqnarray}
+%
+Remarkably, equation \ref{eq:oseen_intermediate} does not depend on the position. Thus, it is simply soluble with an matrix exponential. Then, taking into account the change of basis, this yields an exact solution for $\bm{E}$ and $\bm{H'}$, given in equation \ref{eq:oseen}. 
+\begin{equation}
+\begin{bmatrix}
+E_x\\E_y\\H'_x\\H'_y
+\end{bmatrix}_{z=d} = \underbrace{\begin{pmatrix}
+	\bm{R}(d) & 0\\0 & \bm{R}(d)
+	\end{pmatrix}e^{i\bm{G}d}\begin{pmatrix}
+		\bm{R}^{-1}(0) & 0\\0 & \bm{R}^{-1}(0)
+		\end{pmatrix}}_{=\bm{M_o}}\begin{bmatrix}
+E_x\\E_y\\H'_x\\H'_y
+\end{bmatrix}_{z=0} \label{eq:oseen}
+\end{equation}
+%
+In equation \ref{eq:oseen}, $\bm{M_o}$ is the transfer matrix associated to the Oseen method in the electromagnetic basis.
+
+\subsection{Change of basis}
+\label{sec:chg_basis_oseen}
+The expression given in equation \ref{eq:oseen} is in the electromagnetic basis. In order to use equations \ref{eq:transmission} and \ref{eq:reflection} and get transmission and reflection coefficients for circular components of light, it is required to be able to express the transmission matrix in the circular basis.
+
+Changing the basis inside the chiral medium would be troublesome. Thankfully it is easier to do so in an isotropic medium, and that is enough to express the reflection coefficients of a slab of chiral medium. Equation \ref{eq:oseen} is rewritten
+
+\begin{eqnarray}
+\begin{bmatrix}
+E_x^+\\E_y^+\\-n_2 E_y^+\\n_2 E_x^+
+\end{bmatrix}_L &=& \bm{M_o}\begin{bmatrix}
+E_x^+ + E_x^-\\E_y^+ + E_y^-\\-n_1(E_y^+ - E_y^-)\\n_1(E_x^+ - E_x^-)
+\end{bmatrix}_0\\
+&=&\bm{M_o}\begin{pmatrix}
+1 & 0 & 1 & 0\\
+0 & 1 & 0 & 1\\
+0 & -n_1 & 0 & n_1\\
+n_1 & 0 & -n_1 & 0
+\end{pmatrix}\begin{bmatrix}
+E_x^+\\E_y^+\\E_x^-\\E_y^-
+\end{bmatrix}_0\\
+\begin{bmatrix}
+E_x^+\\E_y^+\\E_x^-\\E_y^-
+\end{bmatrix}_L &=&\underbrace{\begin{pmatrix}
+1 & 0 & 1 & 0\\
+0 & 1 & 0 & 1\\
+0 & -n_2 & 0 & n_2\\
+n_2 & 0 & -n_2 & 0
+\end{pmatrix}^{-1}\bm{M_o}\begin{pmatrix}
+1 & 0 & 1 & 0\\
+0 & 1 & 0 & 1\\
+0 & -n_1 & 0 & n_1\\
+n_1 & 0 & -n_1 & 0
+\end{pmatrix}}_{=\bm{M_o^{\text{Cart}}}}\begin{bmatrix}
+E_x^+\\E_y^+\\E_x^-\\E_y^-
+\end{bmatrix}_0
+\end{eqnarray}
+%
+In isotropic medium it is straightforward to link Then, equation \ref{eq:dh_e} and the definition of $E^\pm_{R,L}$ in isotropic medium give
+\begin{eqnarray}
+\begin{bmatrix}
+E_x^+\\E_y^+\\E_x^-\\E_y^-
+\end{bmatrix} &=& \frac{1}{\sqrt{2}}\begin{pmatrix}
+1 & 1 & 0 & 0\\
+i & -i & 0 & 0\\
+0 & 0 & 1 & 1\\
+0 & 0 & -i & i
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}\\
+\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix} &=& \sqrt{2}\begin{pmatrix}
+1 & -i & 0 & 0\\
+1 & i & 0 & 0\\
+0 & 0 & 1 & i\\
+0 & 0 & 1 & -i
+\end{pmatrix}\begin{bmatrix}
+E_x^+\\E_y^+\\E_x^-\\E_y^-
+\end{bmatrix}
+\end{eqnarray}
+%
+Then the transmission matrix in circular basis, $\bm{M_o^{\text{Circ}}}$, is defined as follow
+\begin{eqnarray}
+\bm{M_o^{\text{Circ}}} &=& \begin{pmatrix}
+1 & -i & 0 & 0\\
+1 & i & 0 & 0\\
+0 & 0 & 1 & i\\
+0 & 0 & 1 & -i
+\end{pmatrix}\bm{M_o^{\text{Cart}}}\begin{pmatrix}
+1 & 1 & 0 & 0\\
+i & -i & 0 & 0\\
+0 & 0 & 1 & 1\\
+0 & 0 & -i & i
+\end{pmatrix}
+\end{eqnarray}
+%
+It is then possible to calculate the transmission coefficients using equations \ref{eq:transmission} and \ref{eq:reflection}.

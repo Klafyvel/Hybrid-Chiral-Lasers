@@ -1,0 +1,588 @@
+\section{Coupled Waves Theory}
+\label{sec:cwt}
+$\bm{M_o}$ defined in equation \ref{eq:oseen} does not give an analytical expression that is easy to use. This section develops an approximate theory that gives simple analytic expressions, using the material present in \cite{mccall_properties_2009}, and extending the theory to left-handed in addition to right-handed media, and deriving the corresponding matrices for the interfaces between chiral media and isotropic or chiral media.
+\subsection{Matrix for a piece of chiral medium in circular basis}
+The coupled waves theory is expressed naturally in the circular basis. This section includes an extensive derivation of this theory, based on \cite{mccall_photonics_2020} and \cite{mccall_simplified_2009}. This also includes a derivation of the transfer matrices for left-handed media that was not available in previous studies\cite{mccall_simplified_2009}\cite{mccall_properties_2009} but is needed for this study.
+
+\subsubsection{Derivation of CWT equations}
+
+Calculating the curl of equation \ref{eq:faraday} yields
+\begin{equation}
+\nabla \times \nabla \times\bm{E} = -\mu_0\pdv{\nabla\bm{H}}{t} = -\mu_0\epsilon_0\bm{\epsilon}\cdot\pdv[2]{\bm{E}}{t}
+\end{equation} 
+%
+Using the vector identity $\nabla\times\nabla\times \bm{A} = \nabla(\nabla\cdot\bm{A}) - \nabla^2\bm{A}$, this yields the 3D Helmholtz equation.
+\begin{equation}
+-\nabla^2\bm{E} + \nabla(\nabla\cdot\bm{E}) = -\mu_0\epsilon_0\bm{\epsilon}\cdot\pdv[2]{\bm{E}}{t}
+\end{equation}
+%
+For a dielectric, $\nabla\cdot\bm{E}=0$. Projecting $\bm{E}$ in the Fourier domain gives $\pdv[2]{\bm{E}}{t}=-\omega^2\bm{E}$. Thus, taking only interest in $\bm{E}_\perp$, this yields the one-dimensional Helmholtz equation, where $k_0^2=\mu_0\epsilon_0\omega^2$.
+\begin{equation}
+	\dv[2]{\mathbf{E}_\perp}{z} + k_0^2 \bm{\epsilon}\cdot\mathbf{E}_\perp = 0 \label{eq:helmholtz}
+\end{equation}
+%
+With $\bm{\epsilon}_\perp = \mathbf{R}(z)\text{diag}(\epsilon_a, \epsilon_b)\mathbf{R}(z)^{-1}$ the anisotropic permittivity defined earlier. Defining $n_{a,b}=\sqrt{\epsilon_{a,b}}$, we can decompose $\mathbf{E}_\perp$ as 
+\begin{eqnarray}
+	\mathbf{E}_\perp &=& \mathbf{A^+}e^{ikz} + \mathbf{A^-}e^{-ikz}\\
+	&=&   A_L^+e^{ikz} \underbrace{\frac{1}{\sqrt{2}}\begin{bmatrix}1\\i\end{bmatrix}}_{=\mathbf{e_1}} + A_R^+e^{ikz} \underbrace{\frac{1}{\sqrt{2}}\begin{bmatrix}1\\-i\end{bmatrix}}_{=\mathbf{e_2}} + A_L^-e^{-ikz} \underbrace{\frac{1}{\sqrt{2}}\begin{bmatrix}1\\-i\end{bmatrix}}_{=\mathbf{e_2}} + A_R^-e^{-ikz} \underbrace{\frac{1}{\sqrt{2}}\begin{bmatrix}1\\i\end{bmatrix}}_{=\mathbf{e_1}} 
+\end{eqnarray}
+and $\mathbf{R}$ as in equation \ref{eq:R}.
+\begin{equation}
+	\mathbf{R} = \underbrace{\frac{1}{2}\begin{pmatrix}1&i\\-i&1\end{pmatrix}}_{=\bm{\sigma}}e^{i(pz + \psi)} + \underbrace{\frac{1}{2}\begin{pmatrix}1&-i\\i&1\end{pmatrix}}_{=\bm{\sigma}^*}e^{-i(pz+\psi)} \label{eq:R}
+\end{equation}
+Then, denoting $\mathbf{S}=\begin{pmatrix}1 & 0\\0&-1\end{pmatrix}$, we have 
+\begin{equation}
+	\bm{\epsilon} = \bm{R}\left(\bar{\epsilon}\mathbf{I} + \delta\epsilon \mathbf{S}\right)\bm{R}^{-1} \label{eq:espilon_decomp}
+\end{equation}
+with $\bar{\epsilon}=\frac{\epsilon_a+\epsilon_b}{2}$ and $\delta\epsilon=\frac{\epsilon_a-\epsilon_b}{2}$. This allows to introduce the average refractive index and the birefringence of the medium, respectively $\bar{n} = \sqrt{\bar{\epsilon}} \approx \frac{n_a+n_b}{2}$ and $\delta n = n_a - n_b$. With this definition, $\delta\epsilon = \frac{(n_a + n_b)(n_a - n_b)}{2} \approx \bar{n}\delta n$. 
+
+Before getting further, it is useful to note some algebraic properties of $\bm{\sigma}$, $\bm{\sigma}^*$.
+\begin{eqnarray}
+	\bm{\sigma}^2 = \bm{\sigma} &,&\bm{\sigma}^{*2} = \bm{\sigma}^* \\
+	\bm{\sigma}\bm{\sigma}^* = 0 &,& \bm{\sigma}^*\bm{\sigma} = 0 \\
+	\bm{\sigma} + \bm{\sigma}^* = \bm{I}
+\end{eqnarray}
+This allows equation \ref{eq:espilon_decomp} to be rewritten as follow
+\begin{equation}
+	\bm{\epsilon} = \bar{\epsilon}\bm{I} + \delta\epsilon\left(\bm{\sigma}\bm{S}\bm{\sigma}^*e^{2i(pz+\psi)} + \bm{\sigma}^*\bm{S}\bm{\sigma}e^{-2i(pz+\psi)}\right) \label{eq:epsilonsigma}
+\end{equation}
+Then, to calculate $k_0^2\bm{\epsilon}\cdot\bm{E}_\perp$, it can be noted that that
+\begin{eqnarray}
+	\bm{\sigma}\bm{S}\bm{\sigma}^*\cdot\bm{e_1}=\bm{e_2} &,& \bm{\sigma}\bm{S}\bm{\sigma}^*\cdot\bm{e_2}=0 \\
+	\bm{\sigma}^*\bm{S}\bm{\sigma}\cdot\bm{e_1}=0 &,& \bm{\sigma}^*\bm{S}\bm{\sigma}\cdot\bm{e_2}=\bm{e_1}
+\end{eqnarray}
+Moreover, as for right-handed media $p>0$, terms with an argument of $\pm i(2p+k)z$ will not be phase matched, meaning that their overall contribution over the medium is negligible. This yields equation \ref{eq:helmholtz_rhs}, introducing $k^2=k_0^2\bar{n}^2$.
+\begin{equation}
+	k_0^2\bm{\epsilon}\cdot\bm{E}_\perp = \underbrace{k_0^2\bar{\epsilon}}_{=k^2}\bm{E}_\perp + k_0^2\delta\epsilon\left(A_R^-e^{i[(2p-k)z+2\psi]}\bm{e_2} + A_R^+e^{-i[(2p-k)z+2\psi]}\bm{e_1}\right)\label{eq:helmholtz_rhs}
+\end{equation}
+Then, in the slow varying envelop approximation, second order derivatives of the envelop can be neglected, yielding equation \ref{eq:helmholtz_lhs}.
+\begin{equation}
+	\dv[2]{\bm{E}_\perp}{z} \approx 2ik \left( \dv{z}A_L^+e^{ikz}\bm{e_1} + \dv{z}A_R^+e^{ikz}\bm{e_2} - \dv{z}A_L^-e^{-ikz}\bm{e_2} - \dv{z}A_R^-e^{-ikz}\bm{e_1}\right) - k^2\bm{E}_\perp \label{eq:helmholtz_lhs}
+\end{equation}
+%
+Combining equations \ref{eq:helmholtz_rhs} and \ref{eq:helmholtz_lhs} and projecting on the circular basis and equating phase-matched terms gives equation \ref{eq:cwt_de}.
+
+\begin{eqnarray}
+	&&\left\{
+	\begin{matrix}
+	0&=&2ik\dv{z}A_L^+ e^{ikz}\\
+	0&=&2ik\dv{z}A_R^+ e^{ikz} + k_0^2\delta \epsilon A_R^- e^{i[(2p-k)z+2\psi]}\\
+	0&=&-2ik\dv{z}A_L^- e^{-ikz}\\
+	0&=&-2ik\dv{z}A_R^- e^{-ikz} + k_0^2\delta \epsilon A_R^+ e^{-i[(2p-k)z+2\psi]}\\
+	\end{matrix}\right.\\
+	\dv{z}\begin{bmatrix}
+	A_L^+ \\
+	A_R^+ \\
+	A_L^- \\
+	A_R^- \\
+	\end{bmatrix} &=&
+	\begin{pmatrix}
+	0 & 0 & 0 & 0 \\
+	0 & 0 & 0 & i\kappa e^{i(2\psi - \delta kz)} \\
+	0 & 0 & 0 & 0 \\
+	0 & -i\kappa e^{-i(2\psi - \delta kz)} & 0 & 0
+	\end{pmatrix}
+	\begin{bmatrix}
+	A_L^+ \\
+	A_R^+ \\
+	A_L^- \\
+	A_R^- \\
+	\end{bmatrix}
+	\label{eq:cwt_de}
+\end{eqnarray}
+Where $\delta k = 2(k-p)$ and $\kappa=\frac{k_0\delta\epsilon}{2\bar{n}}\approx\frac{\pi\delta n}{\lambda_0}$. 
+If the medium considered was left-handed ($p<0$), then terms in $\pm i(2p-k)z$ would be neglected, and equation \ref{eq:cwt_de} would become equation \ref{eq:cwt_de_lh} where $\delta k = 2(k+p)$ and $\kappa$ is unchanged.
+
+\begin{equation}
+	\dv{z}\begin{bmatrix}
+	A_L^+ \\
+	A_R^+ \\
+	A_L^- \\
+	A_R^- \\
+	\end{bmatrix} =
+	\begin{pmatrix}
+	0 & 0 & i\kappa e^{-i(2\psi + \delta kz)} & 0 \\
+	0 & 0 & 0 & 0 \\
+	-i\kappa e^{i(2\psi + \delta kz)}  & 0 & 0 & 0 \\
+	0& 0 & 0 & 0
+	\end{pmatrix}
+	\begin{bmatrix}
+	A_L^+ \\
+	A_R^+ \\
+	A_L^- \\
+	A_R^- \\
+	\end{bmatrix}
+	\label{eq:cwt_de_lh}
+\end{equation}
+
+\subsubsection{Solution to CWT equation}
+
+Equations \ref{eq:cwt_de} and \ref{eq:cwt_de_lh} are solved focusing on non trivial derivatives. They can be rewritten
+\begin{equation}
+	\dv{z}\bm{A}_{L,R} = \begin{pmatrix}0 & i\kappa e^{-2i\varphi(z)} \\ -i\kappa e^{2i\varphi(z)} & 0\end{pmatrix}\bm{A}_{L,R}
+\end{equation}
+Where,
+\begin{itemize}
+	\item for a right handed medium, $\varphi(z) = \delta kz / 2 - \psi$ and $\bm{A}_R = \begin{bmatrix}A^+_R\\A^-_R\end{bmatrix}$;
+	\item for a left handed medium, $\varphi(z) = \delta kz / 2 + \psi$ and $\bm{A}_L = \begin{bmatrix}A^+_L\\A^-_L\end{bmatrix}$.
+\end{itemize}
+Then, defining $\bm{\tilde{A}} = \underbrace{\begin{pmatrix}e^{i\varphi(z)} & 0 \\ 0 & e^{-i\varphi(z)}\end{pmatrix}}_{=\bm{\varphi}(z)}\bm{A}_{L,R}$ yields
+
+\begin{equation}
+\dv{z}\bm{\tilde{A}} = \underbrace{i\begin{pmatrix}\delta k / 2 & \kappa \\ -\kappa & -\delta k / 2\end{pmatrix}}_{=\bm{M}}\bm{\tilde{A}} \label{eq:x_tilde}
+\end{equation}
+The characteristic polynomial of $\bm{M}$ is $\chi = X^2 - \Delta^2$, with $ \Delta = (\kappa^2 - (\delta k / 2)^2)$. Thus, when $\Delta \neq 0$\footnote{The special case $\Delta=0$ is treated in section \ref{sec:special_case}, but the results found in this section are generalisable to the special case.}, $\bm{M}$ is diagonalizable \textit{via} a transformation $\bm{P}$. Denoting $\bm{Y} = \bm{P}\bm{\tilde{A}}$, equation \ref{eq:x_tilde} can be rewritten as in equation \ref{eq:y}, introducing $\bm{D}$.
+
+\begin{equation}
+	\dv{z}\bm{Y} = \underbrace{\bm{P}\bm{M}\bm{P}^{-1}}_{=\bm{D}}\bm{Y}\label{eq:y}
+\end{equation}
+The eigen values of $\bm{D}$ are the roots of $\chi$, \textit{i.e.} $\lambda_\pm = \pm \Delta$. Thus, equation \ref{eq:y} can be solved :
+
+\begin{eqnarray}
+	\bm{Y} &=& \begin{pmatrix}
+	e^{\Delta z} & 0\\
+	0 & e^{-\Delta z}
+	\end{pmatrix} \bm{Y_0}\\
+	&=& \left[\cosh(\Delta z)\bm{I} + \sinh(\Delta z)\underbrace{\begin{pmatrix}
+	1 & 0\\
+	0 & -1
+	\end{pmatrix}}_{\frac{1}{\Delta}\bm{D}}\right]\underbrace{\bm{Y_0}}_{=\bm{P}\bm{\tilde{A}_0}}
+\end{eqnarray}
+This yields:
+
+\begin{equation}
+	\bm{A}_{L,R} = \bm{\varphi}^{-1}(z) \bm{P}^{-1} \left[\cosh(\Delta z)\bm{I} + \frac{\sinh(\Delta z)}{\Delta}\bm{D}\right]\bm{P}\bm{\varphi}(0)\bm{A}_{L,R,0}
+\end{equation}
+\begin{equation}
+	\bm{A}_{L,R} = \left[\cosh(\Delta z)\begin{pmatrix}
+	e^{-i\frac{\delta kz}{2} } & 0 \\
+	0 & e^{i\frac{\delta kz}{2}}
+	\end{pmatrix} + i\frac{\sinh(\Delta z)}{\Delta}\begin{pmatrix}
+	\frac{\delta k}{2} e^{-i\frac{\delta kz}{2}} & \kappa e^{-i(\varphi(z)+\varphi(0))}\\
+	-\kappa e^{i(\varphi(z)+\varphi(0))} & - \frac{\delta k}{2} e^{i\frac{\delta kz}{2}}
+	\end{pmatrix}\right]\bm{A}_{L,R,0}
+\end{equation}
+Finally equations \ref{eq:cwt_de} and \ref{eq:cwt_de_lh} can be solved by equations \ref{eq:sol_cwt} and \ref{eq:sol_cwt_lh} respectively.
+\begin{equation}
+	\begin{bmatrix}
+	A_L^+ \\
+	A_R^+ \\
+	A_L^- \\
+	A_R^- \\
+	\end{bmatrix}_{z} = \begin{pmatrix}
+	1 & 0 & 0 & 0 \\
+	0 & \left[\cosh(\Delta z) + i \frac{\delta k}{2\Delta}\sinh(\Delta z)\right] e^{-i\frac{\delta kz}{2} }& 0 & i\frac{\kappa}{\Delta}\sinh(\Delta z) e^{-i(\varphi(z)+\varphi(0))} \\
+	0 & 0 & 1 & 0 \\
+	0 & -i \frac{\kappa}{\Delta}\sinh(\Delta z)e^{i(\varphi(z)+\varphi(0))} & 0 & \left[\cosh(\Delta z) - i \frac{\delta k 	}{2\Delta}\sinh(\Delta z)\right]e^{i\frac{\delta kz}{2} }
+	\end{pmatrix}\begin{bmatrix}
+	A_L^+ \\
+	A_R^+ \\
+	A_L^- \\
+	A_R^- \\
+	\end{bmatrix}_{z=0}	\label{eq:sol_cwt}
+\end{equation}
+\begin{equation}
+\begin{bmatrix}
+A_L^+ \\
+A_R^+ \\
+A_L^- \\
+A_R^- \\
+\end{bmatrix}_{z} = \begin{pmatrix}
+\left[\cosh(\Delta z) + i \frac{\delta k}{2\Delta}\sinh(\Delta z)\right] e^{-i\frac{\delta kz}{2} } & 0 & i\frac{\kappa}{\Delta}\sinh(\Delta z) e^{-i(\varphi(z)+\varphi(0))} & 0 \\
+0 & 1 & 0 & 0 \\
+-i \frac{\kappa}{\Delta}\sinh(\Delta z)e^{i(\varphi(z)+\varphi(0))} & 0 & \left[\cosh(\Delta z) - i \frac{\delta k 	}{2\Delta}\sinh(\Delta z)\right]e^{i\frac{\delta kz}{2} } & 0 \\
+0 & 0 & 0 & 1
+\end{pmatrix}\begin{bmatrix}
+A_L^+ \\
+A_R^+ \\
+A_L^- \\
+A_R^- \\
+\end{bmatrix}_{z=0}	\label{eq:sol_cwt_lh}
+\end{equation}
+%
+In terms of $\bm{E}_\perp$ field, denoting $E_{L,R}^\pm=A_{R,L}^\pm e^{\pm ikz}$, for right-handed media this can be written
+
+\begin{equation}
+\begin{bmatrix}
+E_L^+ \\
+E_R^+ \\
+E_L^- \\
+E_R^- \\
+\end{bmatrix}_{z=d} = \underbrace{\begin{pmatrix}
+e^{ikd} & 0 & 0 & 0 \\
+0 & \mathcal{P}_R^+ & 0 & \mathcal{Q}_R^+ \\
+0 & 0 & e^{-ikd} & 0 \\
+0 & \mathcal{Q}_R^- & 0 & \mathcal{P}_R^-
+\end{pmatrix}}_{\bm{M_{cwt}}}\begin{bmatrix}
+E_L^+ \\
+E_R^+ \\
+E_L^- \\
+E_R^- \\
+\end{bmatrix}_{z=0} \label{eq:cwt}
+\end{equation}
+with
+\begin{eqnarray}
+	\mathcal{P}_R^\pm &=& \left[\cosh(\Delta d) \pm i \frac{\delta k}{2\Delta}\sinh(\Delta d)\right]e^{\pm ipd}\\
+\mathcal{Q}_R^\pm &=& \pm i\frac{\kappa}{\Delta}\sinh(\Delta d) e^{\pm i(pd+2\psi)}
+\end{eqnarray}
+For left-handed media the solution is written
+\begin{equation}
+\begin{bmatrix}
+E_L^+ \\
+E_R^+ \\
+E_L^- \\
+E_R^- \\
+\end{bmatrix}_{z=d} = \begin{pmatrix}
+	\mathcal{P}^+_L & 0 & \mathcal{Q}_L^+ & 0 \\
+	0 & e^{ikd} & 0 & 0 \\
+	\mathcal{Q}_L^- & 0 & \mathcal{P}^-_L & 0 \\
+	0 & 0 & 0 & e^{-ikd}
+	\end{pmatrix}\begin{bmatrix}
+E_L^+ \\
+E_R^+ \\
+E_L^- \\
+E_R^- \\
+\end{bmatrix}_{z=0} \label{eq:cwt_lh}
+\end{equation}
+where
+\begin{eqnarray}
+\mathcal{P}_L^\pm &=& \left[\cosh(\Delta d) \pm i \frac{\delta k}{2\Delta}\sinh(\Delta d)\right]e^{\mp ipd}\\
+\mathcal{Q}_L^\pm &=& \pm i\frac{\kappa}{\Delta}\sinh(\Delta d) e^{\mp i(pd+2\psi)}
+\end{eqnarray}
+
+\subsubsection{Special case $\Delta=0$}
+\label{sec:special_case}
+The solution given above works under the hypothesis of $\Delta\neq0$. The treatment for the special case $\Delta=0$ was not included in \cite{mccall_photonics_2020}, but for completeness, this section derives a solution for this case.
+
+There are two cases to consider: $\delta k/2 = \kappa$ and $\delta k/2 = -\kappa$. This means equation \ref{eq:x_tilde} can be rewritten into equation \ref{eq:x_tilde_M}.
+\begin{equation}
+	\dv{z}\bm{\tilde{A}} = \bm{M}\bm{\tilde{A}} \label{eq:x_tilde_M}
+\end{equation}
+Where
+\begin{equation}
+	\bm{M} \in \left\{i\kappa\begin{pmatrix}
+	1 & 1\\-1 & -1
+	\end{pmatrix},i\kappa\begin{pmatrix}
+	-1 & 1\\-1 & 1
+	\end{pmatrix}\right\}
+\end{equation}
+%
+$\bm{M}$ is independent of $z$ and is nilpotent of degree 2. Thus, the solutions to equation \ref{eq:x_tilde_M} are given by equations \ref{eq:sol_x_tilde_M_pos} and \ref{eq:sol_x_tilde_M_neg} for $\delta k/2 = \pm\kappa$ respectively.
+\begin{eqnarray}
+\bm{\tilde{A}} &=&\left(\begin{pmatrix}
+1 & 0\\0 & 1
+\end{pmatrix}+i\kappa z\begin{pmatrix}
+1 & 1\\-1 & -1
+\end{pmatrix}\right)\bm{\tilde{A}}_0\label{eq:sol_x_tilde_M_pos}\\
+\bm{\tilde{A}} &=&\left(\begin{pmatrix}
+1 & 0\\0 & 1
+\end{pmatrix}+i\kappa z\begin{pmatrix}
+-1 & 1\\-1 & 1
+\end{pmatrix}\right)\bm{\tilde{A}}_0\label{eq:sol_x_tilde_M_neg}
+\end{eqnarray}
+%
+This means that it is possible to retrieve $\bm{E}_{L,R}$ (depending on the handedness of the medium), using $\bm{E}_{L,R}=\begin{pmatrix}e^{ikz}&0\\0&e^{-ikz}\end{pmatrix}\bm{\varphi}^{-1}(z)\bm{\tilde{A}}$.
+\begin{eqnarray}
+\bm{E}_{L} &=&\begin{pmatrix}
+(1 +i\kappa z)e^{-ipz} & i\kappa z e^{-i(pz+2\psi)}\\-i\kappa z e^{i(pz+2\psi)} & (1-i\kappa z)e^{ipz}
+\end{pmatrix}\bm{E}_{L,0}\label{eq:sol_delta0_EL_pos}\\
+\bm{E}_{R} &=&\begin{pmatrix}
+(1 +i\kappa z)e^{ipz} & i\kappa z e^{i(pz+2\psi)}\\-i\kappa z e^{-i(pz+2\psi)} & (1-i\kappa z)e^{-ipz}
+\end{pmatrix}\bm{E}_{R,0}\label{eq:sol_delta0_ER_pos}\\
+\bm{E}_{L} &=&\begin{pmatrix}
+(1 -i\kappa z)e^{-ipz} & i\kappa z e^{-i(pz+2\psi)}\\-i\kappa z e^{i(pz+2\psi)} & (1+i\kappa z)e^{ipz}
+\end{pmatrix}\bm{E}_{L,0}\label{eq:sol_delta0_EL_neg}\\
+\bm{E}_{R} &=&\begin{pmatrix}
+(1 -i\kappa z)e^{ipz} & i\kappa z e^{i(pz+2\psi)}\\-i\kappa z e^{-i(pz+2\psi)} & (1+i\kappa z)e^{-ipz}
+\end{pmatrix}\bm{E}_{R,0}\label{eq:sol_delta0_ER_neg}
+\end{eqnarray}
+%
+Then, by calculating the limits of $\mathcal{P}$ and $\mathcal{Q}$ when $\Delta$ tends towards 0,
+\begin{eqnarray}
+	\lim_{\Delta\rightarrow 0} \mathcal{P}^\pm_R &=&  (1\pm i\frac{\delta k}{2}z)e^{\pm ipz}\\
+	\lim_{\Delta\rightarrow 0} \mathcal{P}^\pm_L &=&  (1\pm i\frac{\delta k}{2}z)e^{\mp ipz}\\
+	\lim_{\Delta\rightarrow 0} \mathcal{Q}^\pm_R &=&  \pm i\kappa ze^{\pm i(pz+2\psi)}\\
+	\lim_{\Delta\rightarrow 0} \mathcal{Q}^\pm_L &=&  \pm i\kappa ze^{\mp i(pz+2\psi)}
+\end{eqnarray}
+And since when $\Delta$ tends towards 0, $\delta k/2 \rightarrow \pm\kappa$, equations \ref{eq:sol_delta0_EL_pos}, \ref{eq:sol_delta0_ER_pos}, \ref{eq:sol_delta0_EL_neg} and \ref{eq:sol_delta0_ER_neg} can be rewritten as follow.
+\begin{eqnarray}
+\bm{E}_L &=&\lim_{\Delta\rightarrow 0}\begin{pmatrix}
+	\mathcal{P}^+_L & \mathcal{Q}^+_L\\
+	\mathcal{Q}^-_L & \mathcal{P}^-_L
+\end{pmatrix}\\
+\bm{E}_R &=&\lim_{\Delta\rightarrow 0}\begin{pmatrix}
+	\mathcal{P}^+_R & \mathcal{Q}^+_R\\
+	\mathcal{Q}^-_R & \mathcal{P}^-_R
+\end{pmatrix}
+\end{eqnarray}
+%
+That is to say, equations \ref{eq:cwt} and \ref{eq:cwt_lh} can be prolonged by continuity for $\Delta=0$.
+
+\subsection{Change of basis}
+
+To compare equation \ref{eq:cwt} to the Oseen method, or to write continuity of E-H fields at interfaces, the matrix must be expressed in the $[E_x, E_y, H'_x, H'_y]^T$ basis. Using previous notations,
+\begin{eqnarray}
+\bm{E_\perp}=\begin{bmatrix}
+E_x\\E_y
+\end{bmatrix} &=& \left(E_L^+ + E_R^-\right)\bm{e_1} + \left(E_L^- + E_R^+\right)\bm{e_2} \\
+&=& \frac{1}{\sqrt{2}}\begin{pmatrix}
+1 & 1 & 1 & 1\\
+i &-i &-i & i 
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}
+\end{eqnarray}
+From equation \ref{eq:de_h}, 
+\begin{eqnarray}
+\mathbf{H_\perp^\prime} &=& -ik_0^{-1} \begin{vmatrix}
+\mathbf{\hat{x}} & \mathbf{\hat{y}} & \mathbf{\hat{z}}\\
+0 & 0 & \frac{d}{dz}\\
+E_x & E_y & E_z
+\end{vmatrix}\\ 
+&=& k_0^{-1} \begin{pmatrix}
+0 & i\\-i & 0
+\end{pmatrix}\dv{z}\bm{E_\perp} \\
+&=& \frac{1}{\sqrt{2}}k_0^{-1} \begin{pmatrix}
+0 & i\\-i & 0
+\end{pmatrix}\begin{pmatrix}
+1 & 1 & 1 & 1\\
+i &-i &-i & i 
+\end{pmatrix}\dv{z}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}\\
+&=& \frac{1}{\sqrt{2}}k_0^{-1} \begin{pmatrix}-1 & 1 & 1 & -1\\-i & -i & -i & -i\end{pmatrix}\frac{d}{dz}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}
+\end{eqnarray}
+Then, using equation \ref{eq:cwt_de} and writing the derivative of $E_{L,R}^{\pm}$ as the derivative of a product,
+\begin{eqnarray}
+\mathbf{H_\perp^\prime} = \frac{1}{\sqrt{2}}k_0^{-1}\begin{pmatrix}-1 & 1 & 1 & -1\\-i & -i & -i & -i\end{pmatrix}\begin{pmatrix}
+ik & 0 & 0 & 0\\
+0 & ik & 0 & i\kappa e^{2i(\psi+pz)}\\
+0 & 0 & -ik & 0\\
+0 & -i\kappa e^{-2i(\psi + pz)} & 0 & -ik
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}
+\end{eqnarray}
+Using $k=k_0\bar{n}$, this gives\footnote{The simplification $\kappa=\frac{k_0\delta\epsilon}{2\bar{n}}\approx\frac{k_0\delta n}{2}$ could also be used, but in the implementation the $\frac{\kappa}{k_0}$ form is used, as it gives better agreement with the Oseen transformation.}
+\begin{eqnarray}
+\mathbf{H_\perp^\prime} &=& \frac{1}{\sqrt{2}}\begin{pmatrix}-1 & 1 & 1 & -1\\-i & -i & -i & -i\end{pmatrix}\begin{pmatrix}
+i\bar{n} & 0 & 0 & 0\\
+0 & i\bar{n} & 0 & i\frac{\kappa}{k_0}e^{2i(\psi+pz)}\\
+0 & 0 & -i\bar{n} & 0\\
+0 & -i\frac{\kappa}{k_0} e^{-2i(\psi + pz)} & 0 & -i\bar{n}
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}\\
+&=&\frac{1}{\sqrt{2}}\begin{pmatrix}
+- i \bar{n}&i \left(\bar{n} + \frac{\kappa}{k_0} e^{- 2 i \left(p z + \psi\right)}\right)&- i \bar{n}&i \left(\bar{n} + \frac{\kappa}{k_0} e^{2 i \left(p z + \psi\right)}\right)\\
+\bar{n}&\bar{n} - \frac{\kappa}{k_0} e^{- 2 i \left(p z + \psi\right)}&- \bar{n}&- \bar{n} + \frac{\kappa}{k_0} e^{2 i \left(p z + \psi\right)}
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}
+\end{eqnarray}
+Finally
+\begin{equation}
+\begin{bmatrix}
+E_x\\E_y\\H'_x\\H'_y
+\end{bmatrix}_z = \frac{1}{\sqrt{2}}\begin{pmatrix}
+1 & 1 & 1 & 1\\
+i &-i &-i & i\\
+-i\bar{n} & i(\bar{n}+\frac{\kappa}{k_0}e^{-2i(pz+\psi)}) & -i\bar{n} & i(\bar{n}+\frac{\kappa}{k_0} e^{2i(pz+\psi)}) \\
+\bar{n} & \bar{n}-\frac{\kappa}{k_0} e^{-2i(pz+\psi)} & -\bar{n} & -(\bar{n}-\frac{\kappa}{k_0} e^{2i(pz+\psi)}) \\
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_z \label{eq:cwt_change_basis}
+\end{equation}	
+%
+For left-handed media, using equation \ref{eq:cwt_de_lh},
+\begin{eqnarray}
+\mathbf{H_\perp^\prime} = \frac{1}{\sqrt{2}}k_0^{-1}\begin{pmatrix}-1 & 1 & 1 & -1\\-i & -i & -i & -i\end{pmatrix}\begin{pmatrix}
+ik & 0 & i\kappa e^{-2i(\psi+pz)} & 0\\
+0 & ik & 0 & 0\\
+-i\kappa e^{2i(\psi + pz)} & 0 & -ik & 0\\
+0 & 0 & 0 & -ik
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}
+\end{eqnarray}
+Using the definition of $k$, this gives
+\begin{eqnarray}
+\mathbf{H_\perp^\prime} &=& \frac{1}{\sqrt{2}}\begin{pmatrix}-1 & 1 & 1 & -1\\-i & -i & -i & -i\end{pmatrix}\begin{pmatrix}
+i\bar{n} & 0 & i\frac{\kappa}{k_0} e^{-2i(\psi+pz)} & 0\\
+0 & i\bar{n} & 0 & 0\\
+-i\frac{\kappa}{k_0}e^{2i(\psi + pz)} & 0 & -i\bar{n} & 0\\
+0 & 0 & 0 & -i\bar{n}
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}\\
+&=&\frac{1}{\sqrt{2}}\begin{pmatrix}
+-i \left(\bar{n} + \frac{\kappa}{k_0} e^{2 i \left(p z + \psi\right)}\right)&  i \bar{n} & -i \left(\bar{n} + \frac{\kappa}{k_0} e^{-2 i \left(p z + \psi\right)}\right)& i \bar{n}\\
+\bar{n} - \frac{\kappa}{k_0} e^{2 i \left(p z + \psi\right)}&\bar{n}&-\bar{n} + \frac{\kappa}{k_0} e^{-2 i \left(p z + \psi\right)}&- \bar{n}
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}
+\end{eqnarray}
+Finally
+\begin{equation}
+\begin{bmatrix}
+E_x\\E_y\\H'_x\\H'_y
+\end{bmatrix}_z = \frac{1}{\sqrt{2}}\begin{pmatrix}
+	1 & 1 & 1 & 1\\
+	i &-i &-i & i\\
+	-i \left(\bar{n} + \frac{\kappa}{k_0} e^{2 i \left(p z + \psi\right)}\right)&  i \bar{n} & -i \left(\bar{n} + \frac{\kappa}{k_0} e^{-2 i \left(p z + \psi\right)}\right)& i \bar{n}\\
+	\bar{n} - \frac{\kappa}{k_0} e^{2 i \left(p z + \psi\right)}&\bar{n}&-\bar{n} + \frac{\kappa}{k_0} e^{-2 i \left(p z + \psi\right)}&- \bar{n}\\
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_z \label{eq:cwt_change_basis_lh}
+\end{equation}	
+
+\subsection{Interface with an isotropic medium}
+\label{sec:interface_iso}
+Previous works\cite{mccall_properties_2009} did not explicitly introduce the matrices associated with interfaces or assumed a reflection matrix that simply reversed chirality. Here, a complete derivation of this matrix, based on coupled waves theory, is provided. 
+
+Considering the interface between an isotropic medium 1 of refractive index $n_1$ and a chiral medium, labelled $c$, continuity of $\bm{H'}$ and $\bm{E}$ is expected.
+
+Using equation \ref{eq:dh_e} and the definition of $E^\pm_{R,L}$ in isotropic medium we get
+\begin{eqnarray}
+\begin{bmatrix}
+E_x\\E_y\\H_x\\H_y
+\end{bmatrix} = \frac{1}{\sqrt{2}}\begin{pmatrix}
+1 & 1 & 1 & 1\\
+i & -i & -i & i\\
+-in_1 & in_1 & -in_1 & in_1\\
+n_1 & n_1 & -n_1 & -n_1
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}
+\end{eqnarray}
+Using equation \ref{eq:cwt_change_basis} continuity at the boundary with a right-handed medium is written
+\begin{equation}
+\begin{pmatrix}
+1 & 1 & 1 & 1\\
+i & -i & -i & i\\
+-in_1 & in_1 & -in_1 & in_1\\
+n_1 & n_1 & -n_1 & -n_1
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_1 = \begin{pmatrix}
+1 & 1 & 1 & 1\\
+i &-i &-i & i\\
+-i\bar{n} & i(\bar{n}+\frac{\kappa}{k_0}e^{-2i(pz+\psi)}) & -i\bar{n} & i(\bar{n}+\frac{\kappa}{k_0} e^{2i(pz+\psi)}) \\
+\bar{n} & \bar{n}-\frac{\kappa}{k_0} e^{-2i(pz+\psi)} & -\bar{n} & -(\bar{n}-\frac{\kappa}{k_0} e^{2i(pz+\psi)}) \\
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_c
+\end{equation}
+Finally, with $k_1=n_1k_0$,
+\begin{equation}
+\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_1 = \frac{1}{2}\begin{pmatrix}
+1+\frac{\bar{n}}{n_1} & -\frac{\kappa}{k_0 n_1}e^{-2i(pz+\psi)} & 0 & 1-\frac{\bar{n}}{n_1}\\
+0 & 1 + \frac{\bar{n}}{n_1} & 1 -\frac{\bar{n}}{n_1} & \frac{\kappa}{k_0 n_1}e^{2i(pz+\psi)}\\
+0 & 1 - \frac{\bar{n}}{n_1} & 1 + \frac{\bar{n}}{n_1} & -\frac{\kappa}{k_0 n_1}e^{2i(pz+\psi)}\\
+1-\frac{\bar{n}}{n_1} & \frac{\kappa}{k_0 n_1}e^{-2i(pz+\psi)} & 0 & 1+\frac{\bar{n}}{n_1}\\
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_c \label{eq:interface_iso_right}
+\end{equation}
+%
+For left-handed medium, this gives
+\begin{equation}
+\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_1 = \frac{1}{2}\begin{pmatrix}
+1+\frac{\bar{n}}{n_1} & 0 & \frac{\kappa}{k_0 n_1}e^{-2i(pz+\psi)} & 1-\frac{\bar{n}}{n_1}\\
+-\frac{\kappa}{k_0 n_1}e^{2i(pz+\psi)} & 1 + \frac{\bar{n}}{n_1} & 1 -\frac{\bar{n}}{n_1} & 0\\
+\frac{\kappa}{k_0 n_1}e^{2i(pz+\psi)} & 1 - \frac{\bar{n}}{n_1} & 1 + \frac{\bar{n}}{n_1} & 0\\
+1-\frac{\bar{n}}{n_1} & 0 & -\frac{\kappa}{k_0 n_1}e^{-2i(pz+\psi)} & 1+\frac{\bar{n}}{n_1}\\
+\end{pmatrix}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_c
+\end{equation}
+
+\subsection{Interface between two chiral media of same handedness}
+The same method as before is applied at the interface between two chiral media, denoted 1 and 2. Continuity of $\bm{H'}$ and $\bm{E}$ implies
+\begin{equation}
+\bm{\mathcal{T}_1}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_1 = \bm{\mathcal{T}_2}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_2
+\end{equation}
+Where $\bm{\mathcal{T}_{1,2}}$ is defined in equation \ref{eq:cwt_change_basis} for right-handed media and in equation \ref{eq:cwt_change_basis_lh} for left-handed media. This means $\bm{M_{c_1c_2}}$ the matrix describing the interface is defined by
+\begin{equation}
+\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_2 = \underbrace{\bm{\mathcal{T}_2}^{-1}\bm{\mathcal{T}_1}}_{\bm{M_{c_1c_2}}}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_1
+\end{equation}
+%
+Where it is safe to assume that for medium 2, $z=0$. Thus, an analytical expression for $\bm{M_{c_1c_2}}$ is
+\begin{equation}
+\bm{M_{c_1c_2}} = \frac{1}{4n_2^2-\frac{\kappa_2^2}{k_0^2}}\begin{pmatrix}
+4\bar{n}_2\bar{n}-\frac{\kappa_2^2}{k_0^2} & 2\left(\bar{n}P_2^+-n_2P_1^-\right) & \Delta\bar{n} P_2^- & 2\bar{n}_2\Delta\bar{n}+P_1^+P_2^--\frac{\kappa_2^2}{k_0^2}\\
+-\Delta\bar{n}P_2^+ & 4\bar{n}_2\bar{n}-P_1^-P_2^+ & 2\bar{n}_2\Delta\bar{n} & 2\bar{n}_2P_1^+ - 2\bar{n}P_2^+ \\
+\Delta\bar{n}P_2^+ & 2\bar{n}_2\Delta\bar{n}-\frac{\kappa_2^2}{k_0^2} + P_1^-P_2^+ & 4\bar{n}_2\bar{n}-\frac{\kappa_2^2}{k_0^2} & 2\bar{n}P_2^+-2\bar{n}_2P_1^+\\
+2\bar{n}_2\Delta\bar{n} & 2\bar{n}_2P_1^- - 2\bar{n}P_2^- & -2\Delta\bar{n}P_2^- & 4\bar{n}_2\bar{n}-P_1^+P_2^-
+\end{pmatrix}
+\end{equation}
+where
+\begin{equation}
+P_{1}^\pm = \frac{\kappa_1}{k_0}e^{\pm 2i(p_{1}z+\psi_{1})} ,\;
+P_{2}^\pm = \frac{\kappa_2}{k_0}e^{\pm 2i\psi_{2}} ,\; \Delta\bar{n} = \bar{n}_2 - \bar{n}_1 ,\; \bar{n} = \frac{\bar{n}_1+\bar{n}_2}{2}
+\end{equation}
+
+For two left-handed media, this gives
+\begin{equation}
+\bm{M_{c_1c_2}} = \frac{1}{4n_2^2-\frac{\kappa_2^2}{k_0^2}}\begin{pmatrix}
+4\bar{n}_2\bar{n}-P_1^+P_2^- & -\Delta\bar{n}P_2^- & 2\left(\bar{n}_2P_1^--\bar{n}P_2^-\right) & 2\bar{n}_2\Delta\bar{n}\\
+2\left(-\bar{n}_2P_1^++\bar{n}P_2^+\right) & 4\bar{n}_2\bar{n}-\frac{\kappa_2^2}{k_0^2} & 2\bar{n}_2\Delta\bar{n}+P_1^-P_2^+-\frac{\kappa_2^2}{k_0^2} & \Delta\bar{n}P_2^+ \\
+2\left(\bar{n}_2P_1^+-\bar{n}P_2^+\right) & 2\bar{n}_2\Delta\bar{n} & 4\bar{n}_2\bar{n}-P_1^-P_2^+ & -\Delta\bar{n}P_2^+\\
+2\bar{n}_2\Delta\bar{n}+P_1^+P_2^--\frac{\kappa_2^2}{k_0^2} & \Delta\bar{n}P_2^- & 2\left(\bar{n}P_2^--n_2P_1^-\right) & 4\bar{n}\bar{n}_2-\frac{\kappa_2^2}{k_0^2}
+\end{pmatrix}
+\end{equation}
+where $P_{1,2}^\pm$, $\Delta\bar{n}$ and $\bar{n}$ are unchanged.
+
+As a sanity check, it is easily seen that for two identical media, with matched $\psi$, this matrix is the identity. This also hints that if everything is matched except for $\psi$, $\psi$ can be used to tune the reflectivity of the interface. This is further detailed in section \ref{sec:defect_cavity} when exploring the properties of a cavity with a defect.
+
+\subsection{Interface between two chiral media of different handedness}
+
+At the interface between a right-handed medium ($r$) and a left-handed medium ($l$), continuity of $\bm{E}$ and $\bm{H'}$ fields gives
+\begin{equation}
+\bm{\mathcal{T}_l}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_l = \bm{\mathcal{T}_r}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_r
+\end{equation}
+Where $\bm{\mathcal{T}_{l,r}}$ stands for the matrix to transform to the electromagnetic basis. This is rewritten
+\begin{equation}
+\underbrace{\bm{\mathcal{T}_r}^{-1}\bm{\mathcal{T}_l}}_{\bm{M_{lr}}}\begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_l = \begin{bmatrix}
+E_L^+\\E_R^+\\E_L^-\\E_R^-
+\end{bmatrix}_r
+\end{equation}
+With
+\begin{equation}
+\bm{M_{lr}} = \frac{1}{4 \bar{n}_{r}^{2} - \frac{\kappa_{r}^{2}}{k_0^2}}\begin{pmatrix}
+4\bar{n}_{r}\bar{n} - P_l^+P_r^- - \frac{\kappa_{r}^{2}}{k_0^2} & 2 \bar{n} P_r^- & 2 \bar{n}_{r} P_l^- - \Delta\bar{n}P_r^- & -2\bar{n}_r\Delta\bar{n} - \frac{\kappa_{r}^{2}}{k_0^2}\\
+\Delta\bar{n}P^+_r - 2 \bar{n}_{r}P_l^+ & 4 \bar{n}_{r} \bar{n} & - 2 \bar{n}_{r} \Delta\bar{n} + P_l^-P_r^+ & - 2\bar{n}P_r^+\\
+2 \bar{n}_{r}P_l^+ -\Delta\bar{n}P^+_r & - 2 \bar{n}_{r} \Delta\bar{n} - \frac{\kappa_{r}^{2}}{k_0^2} & 4 \bar{n}_{r} \bar{n} - P_l^-P_r^+ - \frac{\kappa_{r}^{2}}{k_0^2} & 2\bar{n}P_r^+\\
+- 2 \bar{n}_{r} \Delta\bar{n} + P_r^-P_l^+ & - 2\bar{n}P_r^- & \Delta\bar{n}P_r^- - 2\bar{n}_{r} P_l^- & 4\bar{n}_r\bar{n}
+\end{pmatrix}
+\end{equation}
+where
+\begin{equation}
+P_{l,r}^\pm = \frac{\kappa_{l,r}^{2}}{k_0^2}e^{\pm 2i(p_{l,r}z_{l,r}+\psi_{l,r})} ,\; \Delta n = \bar{n}_l - \bar{n}_r ,\; \bar{n} = \frac{\bar{n}_l+\bar{n}_r}{2}
+\end{equation}
+The positions $z_{1,2}$ depend on the start of the respective medium. For example, if calculating the matrix from a left-handed medium to a right-handed one $z_r=0$ and $z_l=L$ where $L$ is the length of the left-handed medium.
+
+\subsection{Why use Coupled Wave Theory?}
+Having an exact theory, it is fair to question the use one could make of a second, approximate, theory. The main interest of coupled waves theory is to give an account of the processes taking place in the medium in an easy to understand manner. Indeed, exact theory yields matrices that act as "black boxes": the exponential in their expressions prevents us from having an analytic expression or expressing them in the circular basis in the medium. Yet, having an expression in this basis allows giving an idea of the dynamics affecting each propagating circular component. Moreover, this makes it possible to derive matrices accounting for interfaces, while this is hidden in exact theory.
+
+In conclusion, coupled wave theory finds its usefulness in the process of designing cavities and understanding the dynamics of the medium and thus is perfectly fitted to work in pair with exact theory.
