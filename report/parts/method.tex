@@ -1,4 +1,4 @@
-Four cavities were modelled, using coupled wave theory and exact theory, during this project. Firstly a simple cavity reproducing the results proposed by Topf and McCall\cite{topf_modes_2014}, secondly a chiral cavity with a defect introduced at the centre of the cavity, then, a hybrid cavity composed of a right-handed medium placed between two left-handed media, and finally, a hybrid cavity similar to the previous one, except it has a defect in the centre. This chapter aims to describe the method used to ensure the correctness and a good understanding of the processes that are taking place inside the cavities.
+During this project four cavities were modelled, using coupled wave theory and exact theory. Firstly a simple cavity reproducing the results proposed by Topf and McCall\cite{topf_modes_2014}, secondly a chiral cavity with a defect introduced at the centre of the cavity, then, a hybrid cavity composed of a right-handed medium placed between two left-handed media, and finally, a hybrid cavity similar to the previous one, except it has a defect in the centre. This chapter aims to describe the method used to ensure the correctness and a good understanding of the processes that are taking place inside the cavities.
 
 \section{Reflectivity}
 
@@ -105,9 +105,9 @@ To provide better visualisation of lasing modes, as well as enable their automat
 
 
 
-\section{Output polarization and intensity distribution of the modes}
+\section{Output polarisation and intensity distribution of the modes}
 \label{sec:output_pol}
-It is then possible characterize the modes outputted by the cavity. Indeed, once the lasing cavities have been identified using method described in section \ref{sec:lasing_condition}, the corresponding output mode is found by taking the eigenvector of $\bm{M_{22}}$ with a 0 eigenvalue\footnote{In the simulations, the eigenvector with the smallest absolute eigenvalue is chosen.}.
+It is then possible to characterize the modes outputted by the cavity. Indeed, once the lasing cavities have been identified using method described in section \ref{sec:lasing_condition}, the corresponding output mode is found by taking the eigenvector of $\bm{M_{22}}$ with a 0 eigenvalue\footnote{In the simulations, the eigenvector with the smallest absolute eigenvalue is chosen.}.
 \subsection{Comparison of the output polarisation ellipse}
 
 The field is expressed in the cartesian or electromagnetic basis\footnote{In the case of a laser cavity, since there is not field coming towards the cavity, $E_{x,y}^-(z<0)=E_{x,y}(z<0)$}. Then, defining $R$ and $\delta$ as in equation \ref{eq:method:Rdelta},
@@ -119,7 +119,7 @@ it is possible to calculate angle $\epsilon$ and orientation $\theta$ of the ell
 \epsilon &=& \frac{1}{2}\asin(\sin(2R)|\sin(\delta)|) \label{eq:method:epsilon}\\
 \theta &=& \frac{1}{2}\atan(\tan(2R)\cos(\delta)) \label{eq:method:theta}
 \end{eqnarray}
-$\epsilon$ and $\theta$ relate to the output polarization ellipse as in figure \ref{fig:ellipse}. The handedness of the ellipse can be determined from the sign of $\delta$, but since all calculations in this study are carried in the circular basis, it is simpler to look at the amplitude of $E_L$ and $E_R$. The polarizations outputted by the cavities is compared \textit{via} their corresponding values of $\epsilon$ and $\theta$, as well as the handedness of the ellipse.
+$\epsilon$ and $\theta$ relate to the output polarisation ellipse as in figure \ref{fig:ellipse}. The handedness of the ellipse can be determined from the sign of $\delta$, but since all calculations in this study are carried in the circular basis, it is simpler to look at the amplitude of $E_L$ and $E_R$. The polarisations outputted by the cavities is compared \textit{via} their corresponding values of $\epsilon$ and $\theta$, as well as the handedness of the ellipse.
 
 In order to draw the ellipse, the cartesian form is used, and then rotated by angle $\theta$. The semi-major and semi-minor axes, $a$ and $b$, relate to $\epsilon$ as in equation \ref{eq:tanepsilon}. Thus, $\epsilon$ gives a good measure of how close to a circular polarisation the output is, as a circle would present $\epsilon=45^\circ$.
 \begin{equation}
@@ -161,7 +161,7 @@ R^2 = ax^2+by^2\label{eq:ellipse}
 \subsection{Intensity distribution}
 \label{sec:intensity_distribution}
 
-Knowing the eigen vector of $\bm{M_{22}}$ allows to fully retrieve the field for $z=0^-$, as it is assumed no light goes towards the cavity, \textit{i.e.} $E_{L,R}^+(z=0^-) = 0$. It is then possible to calculate the field at each point $z'$ of the cavity by simply calculating the corresponding matrix. For example if a cavity is described by 
+Knowing the eigenvector of $\bm{M_{22}}$ allows to fully retrieve the field for $z=0^-$, as it is assumed no light goes towards the cavity, \textit{i.e.} $E_{L,R}^+(z=0^-) = 0$. It is then possible to calculate the field at each point $z'$ of the cavity by simply calculating the corresponding matrix. For example if a cavity is described by 
 \begin{equation}
 \bm{M} = \prod_{j}\bm{M_j}
 \end{equation}
