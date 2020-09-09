@@ -8,6 +8,9 @@
 \usepackage[isbn=false, url=false, doi=false]{biblatex}
 \usetheme{metropolis}
 
+
+\usetikzlibrary{decorations.pathreplacing}
+
 \addbibresource{biblio.bib}
 
 \title{Summer project : Hybrid chiral lasers}
@@ -23,11 +26,11 @@
 \begin{frame}{Hybrid chiral lasers}
 	{\Huge What does it mean ?}
 	\begin{itemize}
-		\item Laser $\rightarrow$ O.K.
-		\item Hybrid $\rightarrow$ We will come to that later
-		\item Chiral ?
+		\item<1-> Laser $\rightarrow$ O.K.
+		\item<2-> Hybrid $\rightarrow$ We will come to that later
+		\item<3-> Chiral ?
 	\end{itemize}
-	\begin{definition}[Chirality]
+	\begin{definition}<4->[Chirality]
 		An object is said to be chiral if it is distinguishable from its reflection in a mirror.
 	\end{definition}
 \end{frame}
@@ -66,6 +69,7 @@
 				\caption{A slab of chiral medium}
 			\end{figure}
 		\end{column}
+		\pause
 		\begin{column}{0.5\textwidth}
 			\begin{equation*}
 				\bm{\epsilon} = \begin{pmatrix}\bm{R}^{-1}(z)\cdot\begin{pmatrix}
@@ -85,6 +89,7 @@
 				\sin(pz+\psi) & \cos(pz+\psi)
 				\end{pmatrix}
 			\end{equation*}
+			\pause
 			\begin{alertblock}{Warning}
 				The refractive index does not depend on the position in $(x,y)$ plane.
 			\end{alertblock}
@@ -107,6 +112,7 @@
 			\(\displaystyle\bm{D} = \epsilon_0\bm{\epsilon}\bm{E}\) & \(\displaystyle\bm{B} = \mu_0\bm{H}\)
 		\end{tabulary}
 	\end{column}
+	\pause
 	\begin{column}{0.5\textwidth}
 		Use auxiliary field $\bm{H}'$ and only study planar component of the field.
 		\begin{eqnarray*}
@@ -122,7 +128,7 @@
 \end{frame}
 \begin{frame}{Studying propagation of light in this medium}
 An analytic solution : the Oseen transformation
-
+\pause
 
 Rewrite the field from electromagnetic basis to a more convenient basis.
 \begin{equation*}
@@ -135,6 +141,7 @@ Rewrite the field from electromagnetic basis to a more convenient basis.
 \bm{E}(z)\\\bm{H}'(z)
 \end{bmatrix}
 \end{equation*}
+\pause
 Maxwell's equation are rewritten
 \begin{equation*}
 \dv{z}\begin{bmatrix}
@@ -164,15 +171,17 @@ Maxwell's equation are rewritten
 	\end{bmatrix}_{z=0}
 	\end{equation*}
 	Problem solved !
+	\pause
 	\alert{Or is it ?}
 	\begin{itemize}
-		\item Not satisfactory, the transfer matrix is a black-box without any analytic expression of its coefficients
-		\item An approximate solution allowing to grasp the underlying dynamics of the cavity is needed.
+		\item<3-> Not satisfactory, the transfer matrix is a black-box without any analytic expression of its coefficients
+		\item<4-> An approximate solution allowing to grasp the underlying dynamics of the cavity is needed.
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Studying propagation of light in this medium}
 	An approximate solution : the Coupled Waves Theory (CWT)
+	\pause
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			The field is decomposed upon the circular basis as:
@@ -186,6 +195,7 @@ Maxwell's equation are rewritten
 				\end{itemize}
 			\end{block}
 		\end{column}
+		\pause
 		\begin{column}{0.5\textwidth}
 			Maxwell equations become:
 			\begin{equation*}
@@ -333,12 +343,10 @@ with
 
 \section{Method}
 
-\begin{frame}{Method}
-	\alert{How to calculate reflectivities ?}
-	
+\begin{frame}{Method : Calculate reflectivities}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
-			Partial inverse of a matrix allows determining the reflection and transmission matrices
+			Partial inverse of a matrix gives
 			\begin{equation*}
 			\begin{bmatrix}
 			E_a^+ \\
@@ -357,7 +365,6 @@ with
 			\end{equation*}
 		\end{column}
 		\begin{column}{0.5\textwidth}
-			As 
 			\begin{eqnarray*}
 				\begin{pmatrix}
 					t_{aa} & t_{ab} \\
@@ -372,8 +379,7 @@ with
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Method}
-	\alert{How to characterise laser action ?}
+\begin{frame}{Method : Characterize laser action}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			For a cavity of length $L$.
@@ -403,6 +409,35 @@ with
 		\end{column}
 	\end{columns}
 \end{frame}
+
+\begin{frame}{Method : Purity of the output polarisation ellipse}
+	\begin{figure}
+		\centering
+		\begin{tikzpicture}[scale=2]
+		\fill[color=gray!40] (0.5,0) arc (0:30:0.5) -- (0,0) -- (0.5,0);
+		\draw (0.5,0.15) node[right] {$\theta$};
+		\begin{scope}[rotate=30]
+		\fill[color=gray!40] (1.5,0) arc (-180:-194:0.5) -- (2,0) -- cycle;
+		\draw[color=gray!90] (0,0) ellipse (2 and 0.5);
+		\draw[dotted] (-2.2,0) -- (2.2,0);
+		\draw[dotted] (0,-0.7) -- (0,0.7);
+		\draw[dotted] (2,0) -- (0,0.5);
+		\draw (1.3,0.25) node[below right] {$\epsilon$};
+		\draw[decoration={brace,mirror,raise=1.5pt},decorate]
+		(0,0.5) -- node[left=1pt] {$b$} (0,0);
+		\draw[decoration={brace,mirror,raise=1.5pt},decorate]
+		(-2,0) -- node[below right=1pt] {$a$} (0,0);
+		\end{scope}
+		\draw [thick, ->] (0,-1.3) -- (0,1.3);
+		\draw (2,0) node[right] {$x$};
+		\draw [thick, ->] (-2,0) -- (2,0);
+		\draw (0,1.3) node[above] {$y$};
+		\end{tikzpicture}
+		\caption[Parameters of an ellipse]{Parameters of the ellipse. $\theta$ is the rotation of the axes, $a$ is the semi-major axis, $b$ the semi-minor axis and $\epsilon$ relates to $a$ and $b$ as $\frac{b}{a}=\tan(\epsilon)$.}
+	\end{figure}
+	
+\end{frame}
+
 \section{Results}
 
 \begin{frame}{Results : Defect cavity}
@@ -479,7 +514,8 @@ with
 	\begin{figure}
 		\centering
 		\begin{subfigure}{0.48\linewidth}
-			\begin{tikzpicture}
+			\centering
+			\begin{tikzpicture}[scale=0.90]
 			\fill[red!20] (-1.5,1.2) -- (0,1.2) -- (0,-0.5) -- (-1.5,-0.5) -- cycle;
 			\fill[red!20] (2,1.2) -- (3.5,1.2) -- (3.5,-0.5) -- (2,-0.5) -- cycle;
 			\fill[cyan!20] (0,1.2) -- (2,1.2) -- (2,-0.5) -- (0,-0.5) -- cycle;
@@ -503,7 +539,8 @@ with
 			\label{fig:hybrid:mechanism_lh}
 		\end{subfigure}
 		\begin{subfigure}{0.48\linewidth}
-			\begin{tikzpicture}
+			\centering
+			\begin{tikzpicture}[scale=0.90]
 			\fill[red!20] (-1.5,1.2) -- (0,1.2) -- (0,-0.5) -- (-1.5,-0.5) -- cycle;
 			\fill[red!20] (2,1.2) -- (3.5,1.2) -- (3.5,-0.5) -- (2,-0.5) -- cycle;
 			\fill[cyan!20] (0,1.2) -- (2,1.2) -- (2,-0.5) -- (0,-0.5) -- cycle;
